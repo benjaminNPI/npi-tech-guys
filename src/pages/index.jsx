@@ -116,9 +116,7 @@ export default function Home({ episodes }) {
         </Container>
         <div className="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
           {episodes.map((episode) => (
-            <EpisodeEntry 
-            // key={episode.id} 
-            episode={episode}
+            <EpisodeEntry  key={episode.title} episode={episode}
              />
            ))}
         </div>
