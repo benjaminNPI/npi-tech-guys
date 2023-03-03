@@ -7,6 +7,9 @@ import { Container } from '@/components/Container'
 import { FormattedDate } from '@/components/FormattedDate'
 import { PlayButton } from '@/components/player/PlayButton'
 
+const rssFeed = "http://www.libertyroundtable.com/feed/podcast"
+
+
 export default function Episode({ episode }) {
   let date = new Date(episode.published)
 
@@ -17,7 +20,7 @@ export default function Episode({ episode }) {
         src: episode.audio.src,
         type: episode.audio.type,
       },
-      link: `/${episode.id}`,
+      link: `/${episode.created}`,
     }),
     [episode]
   )
@@ -60,11 +63,15 @@ export default function Episode({ episode }) {
 }
 
 export async function getStaticProps({ params }) {
-  let feed = await parse('https://www.libertyroundtable.com/feed/podcast/')
+  let feed = await parse(rssFeed)
+  console.log(feed)
+
   let episode = feed.items
-    .map(({ id, title, description, content, enclosures, published }) => ({
-      id: id.toString(),
-      title: `${id}: ${title}`,
+
+
+    .map(({ title, description, content, enclosures, published }) => ({
+      title: title,
+      title: `${title}`,
       description,
       content,
       published,
@@ -73,7 +80,7 @@ export async function getStaticProps({ params }) {
         type: enclosure.type,
       }))[0],
     }))
-    .find(({ id }) => id === params.episode)
+    .find(({ title }) => title === params.episode)
 
   if (!episode) {
     return {
@@ -90,12 +97,12 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  let feed = await parse('https://www.libertyroundtable.com/feed/podcast/')
-
+  let feed = await parse(rssFeed)
+  
   return {
-    paths: feed.items.map(({ id }) => ({
+    paths: feed.items.map(({ title }) => ({
       params: {
-        episode: id.toString(),
+        episode: title.toString(),
       },
     })),
     fallback: 'blocking',
