@@ -79,7 +79,7 @@ export async function getStaticProps({ params }) {
         type: enclosure.type,
       }))[0],
     }))
-    .find(({ title }) => title === params.episode)
+    .find(({ id }) => id === params.episode)
 
   if (!episode) {
     return {
@@ -101,7 +101,7 @@ export async function getStaticPaths() {
   return {
     paths: feed.items.map(({ title }) => ({
       params: {
-        episode: title.toString(),
+        episode: title.split(' ').slice(4,7).join('').split('/').join(''),
       },
     })),
     fallback: 'blocking',

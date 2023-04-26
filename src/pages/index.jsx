@@ -44,16 +44,16 @@ function EpisodeEntry({ episode }) {
 
   return (
     <article
-      aria-labelledby={`episode-${episode.id}-title`}
+      aria-labelledby={`episode-${episode.title.split(' ').slice(4,7).join('').split('/').join('')}-title`}
       className="py-10 sm:py-12"
     >
       <Container>
         <div className="flex flex-col items-start">
           <h2
-            id={`episode-${episode.id}-title`}
+            id={`episode-${episode.title.split(' ').slice(4,7).join('').split('/').join('')}-title`}
             className="mt-2 text-lg font-bold text-slate-900"
           >
-            <Link href={`/${episode.id}`}>{episode.title}</Link>
+            <Link href={`/${episode.title.split(' ').slice(4,7).join('').split('/').join('')}`}>{episode.title}</Link>
           </h2>
           <FormattedDate
             date={date}
@@ -85,7 +85,7 @@ function EpisodeEntry({ episode }) {
               /
             </span>
             <Link
-              href={`/${episode.id}`}
+              href={`/${episode.title.split(' ').slice(4,7).join('').split('/').join('')}`}
               className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900"
               aria-label={`Show notes for episode ${episode.title}`}
             >
