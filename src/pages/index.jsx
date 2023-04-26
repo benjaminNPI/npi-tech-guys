@@ -67,8 +67,7 @@ function EpisodeEntry({ episode }) {
               type="button"
               onClick={() => player.toggle()}
               className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900"
-              aria-label={`${player.playing ? 'Pause' : 'Play'} episode ${episode.title
-                }`}
+              aria-label={`${player.playing ? 'Pause' : 'Play'} episode ${episode.title }`}
             >
               <PlayPauseIcon
                 playing={player.playing}
@@ -129,7 +128,7 @@ export default function Home({ episodes }) {
 
 export async function getStaticProps() {
   let feed = await parse(rssFeed)
-  // console.log(feed.items)
+
   return {
     props: {
       episodes: feed.items.map(

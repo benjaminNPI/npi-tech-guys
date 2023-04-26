@@ -64,7 +64,7 @@ export default function Episode({ episode }) {
 
 export async function getStaticProps({ params }) {
   let feed = await parse(rssFeed)
-  // console.log(feed)
+
 
   let episode = feed.items
 
@@ -97,11 +97,11 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   let feed = await parse(rssFeed)
-  
+
   return {
     paths: feed.items.map(({ title }) => ({
       params: {
-        episode: title.split(' ').slice(4,7).join('').split('/').join(''),
+        episode: title.split(' ').slice(3,6).join('').split('/').join(''),
       },
     })),
     fallback: 'blocking',
