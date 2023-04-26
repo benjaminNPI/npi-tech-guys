@@ -28,6 +28,7 @@ function PlayPauseIcon({ playing, ...props }) {
 
 function EpisodeEntry({ episode }) {
   let date = new Date(episode.published)
+  // console.log(episode.title.split(' ').slice(4,7).join('').split('/').join(''))
 
   let audioPlayerData = useMemo(
     () => ({
@@ -128,7 +129,7 @@ export default function Home({ episodes }) {
 
 export async function getStaticProps() {
   let feed = await parse(rssFeed)
-
+  // console.log(feed.items[0].title.split(' ').slice(3,6).join('').split('/').join(''))
   return {
     props: {
       episodes: feed.items.map(
