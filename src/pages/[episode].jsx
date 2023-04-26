@@ -68,11 +68,10 @@ export async function getStaticProps({ params }) {
 
   let episode = feed.items
 
-  .map(({ title, description, content, enclosures, published }) => ({
+  .map(({ title, description, enclosures, published }) => ({
       id: title.split(' ').slice(3,6).join('').split('/').join(''),
       title: `${title}`,
       description,
-      content,
       published,
       audio: enclosures.map((enclosure) => ({
         src: enclosure.url,
