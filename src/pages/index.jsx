@@ -7,6 +7,9 @@ import { useAudioPlayer } from '@/components/AudioProvider'
 import { Container } from '@/components/Container'
 import { FormattedDate } from '@/components/FormattedDate'
 
+const rssFeed = "http://www.libertyroundtable.com/feed/podcast"
+
+
 function PlayPauseIcon({ playing, ...props }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 10 10" fill="none" {...props}>
@@ -41,16 +44,16 @@ function EpisodeEntry({ episode }) {
 
   return (
     <article
-      aria-labelledby={`episode-${episode.title.split(' ').slice(4,7).join('').split('/').join('')}-title`}
+      aria-labelledby={`episode-${episode.id}-title`}
       className="py-10 sm:py-12"
     >
       <Container>
         <div className="flex flex-col items-start">
           <h2
-            id={`episode-${episode.title.split(' ').slice(4,7).join('').split('/').join('')}-title`}
+            id={`episode-${episode.id}-title`}
             className="mt-2 text-lg font-bold text-slate-900"
           >
-            <Link href={`/${episode.title.split(' ').slice(4,7).join('').split('/').join('')}`}>{episode.title}</Link>
+            <Link href={`/${episode.id}`}>{episode.title}</Link>
           </h2>
           <FormattedDate
             date={date}
@@ -64,9 +67,8 @@ function EpisodeEntry({ episode }) {
               type="button"
               onClick={() => player.toggle()}
               className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900"
-              aria-label={`${player.playing ? 'Pause' : 'Play'} episode ${
-                episode.title
-              }`}
+              aria-label={`${player.playing ? 'Pause' : 'Play'} episode ${episode.title
+                }`}
             >
               <PlayPauseIcon
                 playing={player.playing}
@@ -83,7 +85,7 @@ function EpisodeEntry({ episode }) {
               /
             </span>
             <Link
-              href={`/${episode.title.split(' ').slice(4,7).join('').split('/').join('')}`}
+              href={`/${episode.id}`}
               className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900"
               aria-label={`Show notes for episode ${episode.title}`}
             >
@@ -116,9 +118,9 @@ export default function Home({ episodes }) {
         </Container>
         <div className="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100">
           {episodes.map((episode) => (
-            <EpisodeEntry  key={episode.title} episode={episode}
-             />
-           ))}
+            <EpisodeEntry key={episode.title} episode={episode}
+            />
+          ))}
         </div>
       </div>
     </>
@@ -126,12 +128,12 @@ export default function Home({ episodes }) {
 }
 
 export async function getStaticProps() {
-  let feed = await parse('https://www.libertyroundtable.com/feed/podcast/')
+  let feed = await parse(rssFeed)
 
   return {
     props: {
       episodes: feed.items.map(
-        ({ title, description, enclosures, published }) => ({
+        ({  title, description, enclosures, published }) => ({
           
           title: ` ${title}`,
           published,

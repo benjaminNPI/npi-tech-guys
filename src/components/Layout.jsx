@@ -196,7 +196,7 @@ export function Layout({ children }) {
             aria-label="Homepage"
           >
             <Image
-              className="w-full"
+              className="w-full p-5"
               src={posterImage}
               alt=""
               sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
