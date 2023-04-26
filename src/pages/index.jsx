@@ -60,7 +60,7 @@ function EpisodeEntry({ episode }) {
             className="order-first font-mono text-sm leading-7 text-slate-500"
           />
           <p className="mt-1 text-base leading-7 text-slate-700">
-            {/* {episode.description} */}
+            {episode.description.split(' *').join(" \n")}
           </p>
           <div className="mt-4 flex items-center gap-4">
             <button
@@ -129,11 +129,11 @@ export default function Home({ episodes }) {
 
 export async function getStaticProps() {
   let feed = await parse(rssFeed)
-
+  // console.log(feed.items)
   return {
     props: {
       episodes: feed.items.map(
-        ({  title, description, enclosures, published }) => ({
+        ({  title, description, enclosures, published}) => ({
           
           title: ` ${title}`,
           published,
