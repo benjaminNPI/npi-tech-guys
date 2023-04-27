@@ -7,7 +7,7 @@ import { useAudioPlayer } from '@/components/AudioProvider'
 import { Container } from '@/components/Container'
 import { FormattedDate } from '@/components/FormattedDate'
 
-const rssFeed = "http://www.libertyroundtable.com/feed/podcast"
+const rssFeed = "https://feeds.blubrry.com/feeds/twr.xml"
 
 
 function PlayPauseIcon({ playing, ...props }) {
@@ -60,8 +60,8 @@ function EpisodeEntry({ episode }) {
             date={date}
             className="order-first font-mono text-sm leading-7 text-slate-500"
           />
-          <p className="mt-1 text-base leading-7 text-slate-700">
-            {episode.description.split(' *').join(" \n")}
+          <p className="mt-1 text-base leading-7 text-slate-700" dangerouslySetInnerHTML={{ __html: episode.description }}>
+            
           </p>
           <div className="mt-4 flex items-center gap-4">
             <button
@@ -129,7 +129,7 @@ export default function Home({ episodes }) {
 
 export async function getStaticProps() {
   let feed = await parse(rssFeed)
-  // console.log(feed.items[0].title.split(' ').slice(3,6).join('').split('/').join(''))
+  console.log(feed.items[0].title.split(' ').slice(3,6).join('').split('/').join(''))
   return {
     props: {
       episodes: feed.items.map(

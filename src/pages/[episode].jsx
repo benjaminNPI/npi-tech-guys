@@ -7,7 +7,7 @@ import { Container } from '@/components/Container'
 import { FormattedDate } from '@/components/FormattedDate'
 import { PlayButton } from '@/components/player/PlayButton'
 
-const rssFeed = "http://www.libertyroundtable.com/feed/podcast"
+const rssFeed = "https://feeds.blubrry.com/feeds/twr.xml"
 
 
 export default function Episode({ episode }) {
@@ -96,7 +96,7 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   let feed = await parse(rssFeed)
-  // console.log(feed.items[0].title.split(' ').slice(3,6).join('').split('/').join(''))
+  // console.log(feed.items)
 
   return {
     paths: feed.items.map(({ title }) => ({
