@@ -153,7 +153,7 @@ function AboutSection(props) {
           !isExpanded && 'lg:line-clamp-4'
         )}
       >
-        A variety of local, state, and national political topics are explored from a refreshing, unique, and independent perspective. Political conversation that takes on the lamestream press like never before, that cuts through the spin and fluff to the heart of today’s key political issues. Promoting God, Family, and Country in the media and our lives. Let Freedom Ring!
+        Welcome to TechWatch Radio, your go-to radio show for cutting-edge Managed IT Services! Are you tired of unresponsive, slow service from your current IT provider? Discover a world where network security, data protection, and expert support come together seamlessly. Stay tuned to learn how to transform your IT experience and never worry about downtime again! Call us at 866-986-NEWS and let's make IT great together!
       </p>
       {!isExpanded && (
         <button
