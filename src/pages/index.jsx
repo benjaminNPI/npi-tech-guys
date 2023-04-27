@@ -60,7 +60,9 @@ function EpisodeEntry({ episode }) {
             date={date}
             className="order-first font-mono text-sm leading-7 text-slate-500"
           />
-          <p className="mt-1 text-base leading-7 text-slate-700" dangerouslySetInnerHTML={{ __html: episode.description }}>
+          <p className="mt-1 text-base leading-7 text-slate-700" 
+          // dangerouslySetInnerHTML={{ __html: episode.description }}
+          >
 
           </p>
           <div className="mt-4 flex items-center gap-4">
@@ -101,8 +103,9 @@ function EpisodeEntry({ episode }) {
               href={`${episode.audio.src}`}
               legacyBehavior
               aria-label={`Download this episode`}
+              
             >
-              <a className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900" download>Download</a>
+              <a target='_blank' className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900" download>Download</a>
             </Link>
           </div>
         </div>
