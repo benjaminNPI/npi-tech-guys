@@ -37,7 +37,7 @@ function EpisodeEntry({ episode }) {
         src: episode.audio.src,
         type: episode.audio.type,
       },
-      link: `/${episode.title.split(' ').slice(4, 7).join('').split('/').join('')}`,
+      link: `/${episode.title.split(' ')[4]}`,
     }),
     [episode]
   )
@@ -45,16 +45,16 @@ function EpisodeEntry({ episode }) {
 
   return (
     <article
-      aria-labelledby={`episode-${episode.title.split(' ').slice(4, 7).join('').split('/').join('')}-title`}
+      aria-labelledby={`episode-${episode.title.split(' ')[4]}-title`}
       className="py-10 sm:py-12"
     >
       <Container>
         <div className="flex flex-col items-start">
           <h2
-            id={`episode-${episode.title.split(' ').slice(4, 7).join('').split('/').join('')}-title`}
+            id={`episode-${episode.title.split(' ')[4]}-title`}
             className="mt-2 text-lg font-bold text-slate-900"
           >
-            <Link href={`/${episode.title.split(' ').slice(4, 7).join('').split('/').join('')}`}>{episode.title}</Link>
+            <Link href={`/${episode.title.split(' ')[4]}`}>{episode.title}</Link>
           </h2>
           <FormattedDate
             date={date}
@@ -85,7 +85,7 @@ function EpisodeEntry({ episode }) {
               /
             </span>
             <Link
-              href={`${episode.title.split(' ').slice(4, 7).join('').split('/').join('')}`}
+              href={`${episode.title.split(' ')[4]}`}
               className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900"
               aria-label={`Show notes for episode ${episode.title}`}
             >
