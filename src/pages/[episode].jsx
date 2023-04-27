@@ -101,7 +101,7 @@ export async function getStaticPaths() {
   return {
     paths: feed.items.map(({ title }) => ({
       params: {
-        episode: title.split(' ').slice(3,6).join('').split('/').join(''),
+        episode: title,
       },
     })),
     fallback: 'blocking',
