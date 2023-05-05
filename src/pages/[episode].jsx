@@ -7,7 +7,7 @@ import { Container } from '@/components/Container'
 import { FormattedDate } from '@/components/FormattedDate'
 import { PlayButton } from '@/components/player/PlayButton'
 
-const rssFeed = "https://feeds.blubrry.com/feeds/twr.xml"
+const rssFeed = "https://feeds.blubrry.com/feeds/1473047.xml"
 
 
 export default function Episode({ episode }) {
