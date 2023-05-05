@@ -37,7 +37,7 @@ function EpisodeEntry({ episode }) {
         src: episode.audio.src,
         type: episode.audio.type,
       },
-      link: `/${episode.title.split(' ').slice(4, 7).join('').split('/').join('')}`,
+      link: `/${episode.title.split(' ')[4]}`,
     }),
     [episode]
   )
@@ -45,22 +45,24 @@ function EpisodeEntry({ episode }) {
 
   return (
     <article
-      aria-labelledby={`episode-${episode.title.split(' ').slice(4, 7).join('').split('/').join('')}-title`}
+      aria-labelledby={`episode-${episode.title.split(' ')[4]}-title`}
       className="py-10 sm:py-12"
     >
       <Container>
         <div className="flex flex-col items-start">
           <h2
-            id={`episode-${episode.title.split(' ').slice(4, 7).join('').split('/').join('')}-title`}
+            id={`episode-${episode.title.split(' ')[4]}-title`}
             className="mt-2 text-lg font-bold text-slate-900"
           >
-            <Link href={`/${episode.title.split(' ').slice(4, 7).join('').split('/').join('')}`}>{episode.title}</Link>
+            <Link href={`/${episode.title.split(' ')[4]}`}>{episode.title}</Link>
           </h2>
           <FormattedDate
             date={date}
             className="order-first font-mono text-sm leading-7 text-slate-500"
           />
-          <p className="mt-1 text-base leading-7 text-slate-700" dangerouslySetInnerHTML={{ __html: episode.description }}>
+          <p className="mt-1 text-base leading-7 text-slate-700" 
+          // dangerouslySetInnerHTML={{ __html: episode.description }}
+          >
 
           </p>
           <div className="mt-4 flex items-center gap-4">
@@ -85,7 +87,7 @@ function EpisodeEntry({ episode }) {
               /
             </span>
             <Link
-              href={`${episode.title.split(' ').slice(4, 7).join('').split('/').join('')}`}
+              href={`${episode.title.split(' ')[4]}`}
               className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900"
               aria-label={`Show notes for episode ${episode.title}`}
             >
@@ -101,8 +103,9 @@ function EpisodeEntry({ episode }) {
               href={`${episode.audio.src}`}
               legacyBehavior
               aria-label={`Download this episode`}
+              
             >
-              <a className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900" download>Download</a>
+              <a target='_blank' className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900" download>Download</a>
             </Link>
           </div>
         </div>
