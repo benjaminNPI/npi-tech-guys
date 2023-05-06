@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { parse } from 'rss-to-json'
-
 import { useAudioPlayer } from '@/components/AudioProvider'
 import { Container } from '@/components/Container'
 import { FormattedDate } from '@/components/FormattedDate'
@@ -143,14 +142,15 @@ export default function Home({ episodes }) {
   )
 }
 
+
+// define the getStaticProps function
 export async function getStaticProps() {
-  let feed = await parse(rssFeed)
-  // console.log(feed.items[0].title.split(' ').slice(3,6).join('').split('/').join(''))
+  let feed = await parse(rssFeed);
+  console.log("test1");
   return {
     props: {
       episodes: feed.items.map(
         ({ title, description, enclosures, published }) => ({
-
           title: ` ${title}`,
           published,
           description,
@@ -162,5 +162,5 @@ export async function getStaticProps() {
       ),
     },
     revalidate: 10,
-  }
+  };
 }
