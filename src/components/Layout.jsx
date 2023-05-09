@@ -153,7 +153,7 @@ function AboutSection(props) {
           !isExpanded && 'lg:line-clamp-4'
         )}
       >
-        Welcome to NPI Tech Guys, your go-to radio show for cutting-edge Managed IT Services! Are you Are you tired of unresponsive, slow service from your current IT provider? Discover a world where network security, data protection, and expert support come together seamlessly. Stay tuned to learn how to transform your IT experience and never worry about downtime again! Call us at (801) 824-7820 and let`s make IT great together!
+        Welcome to NPI Tech Guys, your go-to radio show for cutting-edge Managed IT Services! Are you tired of unresponsive, slow service from your current IT provider? Discover a world where network security, data protection, and expert support come together seamlessly. Stay tuned to learn how to transform your IT experience and never worry about downtime again! Call us at (801) 824-7820 and let`s make IT great together!
       </p>
       {!isExpanded && (
         <button
