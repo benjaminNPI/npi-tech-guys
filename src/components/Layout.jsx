@@ -244,6 +244,8 @@ export function Layout({ children }) {
               ))}
             </ul>
           </section>
+          <div className='mt-12 text-base leading-7 text-slate-700'>© 2022-2023. NPI TECH GUYS. All Rights Reserved.
+          </div>
         </div>
       </header>
       <main className="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120">
