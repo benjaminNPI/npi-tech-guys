@@ -155,6 +155,7 @@ function AboutSection(props) {
       >
         Welcome to NPI Tech Guys, your go-to radio show for cutting-edge Managed IT Services! Are you tired of unresponsive, slow service from your current IT provider? Discover a world where network security, data protection, and expert support come together seamlessly. Stay tuned to learn how to transform your IT experience and never worry about downtime again! Call us at (801) 824-7820 and let`s make IT great together!
       </p>
+      
       {!isExpanded && (
         <button
           type="button"
@@ -212,7 +213,7 @@ export function Layout({ children }) {
             </p>
           </div>
           <AboutSection className="mt-12 hidden lg:block" />
-          <section className="mt-10 lg:mt-12">
+          <section className="mt-10 lg:mt-12 mb-10">
             <h2 className="sr-only flex items-center font-mono text-sm font-medium leading-7 text-slate-900 lg:not-sr-only">
               <TinyWaveFormIcon
                 colors={['fill-red-600', 'fill-black-300']}
@@ -244,15 +245,16 @@ export function Layout({ children }) {
               ))}
             </ul>
           </section>
-          <div className='mt-12 text-base leading-7 text-slate-700'>© 2022-2023. NPI TECH GUYS. All Rights Reserved.
+          <div className='mt-12 text-base leading-7 text-slate-700 hidden lg:inline'>© 2022-2023. NPI TECH GUYS. All Rights Reserved.
           </div>
+          
         </div>
       </header>
       <main className="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120">
         <Waveform className="absolute left-0 top-0 h-20 w-full" />
         <div className="relative">{children}</div>
       </main>
-      <footer className="border-t border-slate-200 bg-slate-50 py-10 pb-40 sm:py-16 sm:pb-32 lg:hidden">
+      <footer className="border-t border-slate-200 bg-slate-50 py-10 pb-10 sm:py-16 sm:pb-32 lg:hidden">
         <div className="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4">
           <AboutSection />
           <h2 className="mt-8 flex items-center font-mono text-sm font-medium leading-7 text-slate-900">
@@ -271,11 +273,14 @@ export function Layout({ children }) {
               </Fragment>
             ))}
           </div>
+          <div className='mt-12 text-base leading-7 text-slate-700 bottom'>© 2022-2023. NPI TECH GUYS. All Rights Reserved.
+          </div>
         </div>
       </footer>
       <div className="fixed inset-x-0 bottom-0 z-10 lg:left-112 xl:left-120">
         <AudioPlayer />
       </div>
+      
     </>
   )
 }
