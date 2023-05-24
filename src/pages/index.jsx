@@ -6,7 +6,7 @@ import { useAudioPlayer } from '@/components/AudioProvider'
 import { Container } from '@/components/Container'
 import { FormattedDate } from '@/components/FormattedDate'
 
-const rssFeed = "https://feeds.blubrry.com/feeds/1473047.xml"
+const rssFeed = "https://feeds.blubrry.com/feeds/1473047.xml";
 
 
 function PlayPauseIcon({ playing, ...props }) {
