@@ -155,7 +155,7 @@ function AboutSection(props) {
       >
         Welcome to NPI Tech Guys, your go-to radio show for cutting-edge Managed IT Services! Are you tired of unresponsive, slow service from your current IT provider? Discover a world where network security, data protection, and expert support come together seamlessly. Stay tuned to learn how to transform your IT experience and never worry about downtime again! Call us at (801) 824-7820 and let`s make IT great together!
       </p>
-      
+
       {!isExpanded && (
         <button
           type="button"
@@ -171,6 +171,27 @@ function AboutSection(props) {
 
 export function Layout({ children }) {
   let hosts = ['Sam Bushman', 'Jay Hill', 'Various Guests']
+  const subScript = `<div id="mc_embed_shell">
+<link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+  #mc_embed_signup{background:#fff; false;clear:left; font:14px Helvetica,Arial,sans-serif;}
+  /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+     We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://gmail.us9.list-manage.com/subscribe/post?u=fe390792b7a54704abc0853e3&amp;id=fb442338a2&amp;f_id=00b118e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate " target="_blank">
+  <div id="mc_embed_signup_scroll"><h2>Subscribe</h2><h3>Join our newsletter to get tech updates!</h3>
+      <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+      <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""><span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span></div>
+  <div id="mce-responses" class="clear">
+      <div class="response" id="mce-error-response" style="display: none;"></div>
+      <div class="response" id="mce-success-response" style="display: none;"></div>
+  </div><div aria-hidden="true" style="position: absolute; left: -5000px;"><input type="text" name="b_fe390792b7a54704abc0853e3_fb442338a2" tabindex="-1" value=""></div><div class="clear"><input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe"></div>
+</div>
+</form>
+</div>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>`
+
 
   return (
     <>
@@ -245,9 +266,10 @@ export function Layout({ children }) {
               ))}
             </ul>
           </section>
+          <div className='hidden lg:inline' dangerouslySetInnerHTML={{ __html: subScript }} />
           <div className='mt-12 text-base leading-7 text-slate-700 hidden lg:inline'>© 2022-2023. NPI TECH GUYS. All Rights Reserved.
           </div>
-          
+
         </div>
       </header>
       <main className="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-112 lg:border-t-0 xl:ml-120">
@@ -273,6 +295,7 @@ export function Layout({ children }) {
               </Fragment>
             ))}
           </div>
+          <div className='mt-12 bottom' dangerouslySetInnerHTML={{ __html: subScript }} />
           <div className='mt-12 text-base leading-7 text-slate-700 bottom'>© 2022-2023. NPI TECH GUYS. All Rights Reserved.
           </div>
         </div>
@@ -280,7 +303,7 @@ export function Layout({ children }) {
       <div className="fixed inset-x-0 bottom-0 z-10 lg:left-112 xl:left-120">
         <AudioPlayer />
       </div>
-      
+
     </>
   )
 }

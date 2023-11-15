@@ -1,6 +1,7 @@
 import { AudioProvider } from '@/components/AudioProvider'
 import { Layout } from '@/components/Layout'
 import React, { useEffect } from "react";
+import '../index.css'
 
 import '@/styles/tailwind.css'
 import 'focus-visible'
