@@ -146,6 +146,8 @@ export default function Home({ episodes }) {
 // define the getStaticProps function
 export async function getStaticProps() {
   let feed = await parse(rssFeed);
+  // console.log("test1");
+  // Testing
   return {
     props: {
       episodes: feed.items.map(
