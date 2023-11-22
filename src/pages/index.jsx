@@ -42,6 +42,20 @@ function EpisodeEntry({ episode }) {
   )
   let player = useAudioPlayer(audioPlayerData)
 
+  var originalTitle = episode.title;
+  var titleParts = originalTitle.split(' ');
+  var dateStr = titleParts[titleParts.length - 1];
+  
+  // Converting the date string to a Date object (assuming UTC time zone)
+  var dateObject = new Date(dateStr.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3') + 'T00:00:00Z');
+  
+  // Formatting the date in the desired format with explicit time zone (e.g., 'UTC' or 'America/New_York')
+  var formattedDate = dateObject.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+  
+  // Creating the new title
+  var newTitle = `${titleParts.slice(0, -1).join(' ')} ${formattedDate}`;
+
+
   return (
     <article
       aria-labelledby={`episode-${episode.title.split(' ')[5]}-title`}
@@ -51,16 +65,16 @@ function EpisodeEntry({ episode }) {
         <div className="flex flex-col items-start">
           <h2
             id={`episode-${episode.title.split(' ')[5]}-title`}
-            className="mt-2 text-lg font-bold text-slate-900"
+            className="mt-2 text-lg font-bold text-red-700 hover:underline"
           >
-            <Link href={`/${episode.title.split(' ')[5]}`}>{episode.title}</Link>
+            <Link href={`/${episode.title.split(' ')[5]}`}>{newTitle}</Link>
           </h2>
           <FormattedDate
             date={date}
             className="order-first font-mono text-sm leading-7 text-slate-500"
           />
-          <p className="mt-1 text-base leading-7 text-slate-700" 
-          dangerouslySetInnerHTML={{ __html: episode.description }}
+          <p className="mt-1 text-base leading-7 text-slate-700"
+            dangerouslySetInnerHTML={{ __html: episode.description }}
           >
 
           </p>
@@ -102,7 +116,7 @@ function EpisodeEntry({ episode }) {
               href={`${episode.audio.src}`}
               legacyBehavior
               aria-label={`Download this episode`}
-              
+
             >
               <a target='_blank' className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900" download>Download</a>
             </Link>

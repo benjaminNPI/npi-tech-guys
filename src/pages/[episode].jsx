@@ -26,6 +26,19 @@ export default function Episode({ episode }) {
   )
   let player = useAudioPlayer(audioPlayerData)
 
+  var originalTitle = episode.title;
+  var titleParts = originalTitle.split(' ');
+  var dateStr = titleParts[titleParts.length - 1];
+  
+  // Converting the date string to a Date object (assuming UTC time zone)
+  var dateObject = new Date(dateStr.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3') + 'T00:00:00Z');
+  
+  // Formatting the date in the desired format with explicit time zone (e.g., 'UTC' or 'America/New_York')
+  var formattedDate = dateObject.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+  
+  // Creating the new title
+  var newTitle = `${titleParts.slice(0, -1).join(' ')} ${formattedDate}`;
+
   return (
     <>
       <Head>
@@ -39,7 +52,7 @@ export default function Episode({ episode }) {
               <PlayButton player={player} size="large" />
               <div className="flex flex-col">
                 <h1 className="mt-2 text-4xl font-bold text-slate-900">
-                  {episode.title}
+                  {newTitle}
                 </h1>
                 <FormattedDate
                   date={date}
