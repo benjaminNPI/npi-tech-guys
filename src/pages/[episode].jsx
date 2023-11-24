@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import Head from 'next/head'
 import { parse } from 'rss-to-json'
-
 import { useAudioPlayer } from '@/components/AudioProvider'
 import { Container } from '@/components/Container'
 import { FormattedDate } from '@/components/FormattedDate'
@@ -26,19 +25,6 @@ export default function Episode({ episode }) {
   )
   let player = useAudioPlayer(audioPlayerData)
 
-  var originalTitle = episode.title;
-  var titleParts = originalTitle.split(' ');
-  var dateStr = titleParts[titleParts.length - 1];
-  
-  // Converting the date string to a Date object (assuming UTC time zone)
-  var dateObject = new Date(dateStr.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3') + 'T00:00:00Z');
-  
-  // Formatting the date in the desired format with explicit time zone (e.g., 'UTC' or 'America/New_York')
-  var formattedDate = dateObject.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
-  
-  // Creating the new title
-  var newTitle = `${titleParts.slice(0, -1).join(' ')} ${formattedDate}`;
-
   return (
     <>
       <Head>
@@ -52,7 +38,7 @@ export default function Episode({ episode }) {
               <PlayButton player={player} size="large" />
               <div className="flex flex-col">
                 <h1 className="mt-2 text-4xl font-bold text-slate-900">
-                  {newTitle}
+                  {episode.title}
                 </h1>
                 <FormattedDate
                   date={date}
@@ -77,12 +63,10 @@ export default function Episode({ episode }) {
 
 export async function getStaticProps({ params }) {
   let feed = await parse(rssFeed)
-  // console.log(feed.items[0].title.split(' ').slice(3,6).join('').split('/').join(''))
-
   let episode = feed.items
 
   .map(({ title, description, enclosures, published }) => ({
-      id: title.split(' ')[4],
+      id: `${published}`,
       title: `${title}`,
       description,
       published,
@@ -109,12 +93,11 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   let feed = await parse(rssFeed)
-  // console.log(feed.items[0].title.split(' ')[3])
 
   return {
-    paths: feed.items.map(({ title }) => ({
+    paths: feed.items.map(({ published }) => ({
       params: {
-        episode: String(title.split(' ')[4]),
+        episode: `${published}`,
       },
     })),
     fallback: 'blocking',
