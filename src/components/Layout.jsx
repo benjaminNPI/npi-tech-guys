@@ -367,8 +367,15 @@ export function Layout({ children }) {
               ))}
             </ul>
           </section>
-          <div className='hidden lg:inline' dangerouslySetInnerHTML={{ __html: subScript }} />
-          <div className='mt-12 text-base leading-7 text-slate-700 hidden lg:inline'>© 2022-2023. NPI TECH GUYS. All Rights Reserved.
+          <div className="py-5 rounded-lg hidden lg:inline-block">
+            <h1 className="text-xl font-bold text-slate-900 mb-4">Join our weekly mailing list!</h1>
+
+
+            <Link href='https://www.networkprovidersinc.com/drip-tips/' target='_blank' className="bg-red-700 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-blue active:bg-red-800">
+              Join now
+            </Link>
+          </div>
+          <div className='mt-12 text-base leading-7 text-slate-700 hidden lg:inline-block'>© 2022-2023. NPI TECH GUYS. All Rights Reserved.
           </div>
 
         </div>
@@ -396,7 +403,14 @@ export function Layout({ children }) {
               </Fragment>
             ))}
           </div>
-          <div className='mt-12 bottom' dangerouslySetInnerHTML={{ __html: subScript }} />
+          <div className=" pt-16 rounded-lg">
+            <h1 className="text-xl font-bold text-slate-900 mb-4">Join our weekly mailing list!</h1>
+
+
+            <Link href='https://www.networkprovidersinc.com/drip-tips/' target='_blank' className="bg-red-700 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-blue active:bg-red-800">
+              Join now
+            </Link>
+          </div>
           <div className='mt-12 text-base leading-7 text-slate-700 bottom'>© 2022-2023. NPI TECH GUYS. All Rights Reserved.
           </div>
         </div>
