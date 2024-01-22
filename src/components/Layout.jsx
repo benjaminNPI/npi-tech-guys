@@ -28,6 +28,9 @@ function ToggleSwitch() {
       router.push("/");
     }
   }
+  
+  const today = new Date();
+  const year = today.getFullYear();
 
   return (
     <>
@@ -411,7 +414,7 @@ export function Layout({ children }) {
               Join now
             </Link>
           </div>
-          <div className='mt-12 text-base leading-7 text-slate-700 bottom'>© 2022-2023. NPI TECH GUYS. All Rights Reserved.
+          <div className='mt-12 text-base leading-7 text-slate-700 bottom'>© 2022-{year}. NPI TECH GUYS. All Rights Reserved.
           </div>
         </div>
       </footer>
