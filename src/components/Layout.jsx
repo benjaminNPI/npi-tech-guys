@@ -29,8 +29,7 @@ function ToggleSwitch() {
     }
   }
   
-  const today = new Date();
-  const year = today.getFullYear();
+
 
   return (
     <>
@@ -290,7 +289,8 @@ export function Layout({ children }) {
           </div>
           <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>`
 
-
+          const today = new Date();
+          const year = today.getFullYear();
   return (
     <>
       <header className="bg-slate-50 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-112 lg:items-start lg:overflow-y-auto xl:w-120">
