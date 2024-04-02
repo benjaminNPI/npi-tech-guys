@@ -49,7 +49,7 @@ function EpisodeEntry({ episode }) {
         <div className="flex flex-col items-start">
           <h2
             id={`episode-${episode.title}-title`}
-            className="mt-2 text-lg font-bold text-red-700 hover:underline"
+            className="mt-2 text-lg font-bold text-[#662B33] hover:underline"
           >
             <Link href={`/${episode.published}`}>{episode.title}</Link>
           </h2>
@@ -58,15 +58,14 @@ function EpisodeEntry({ episode }) {
             className="order-first font-mono text-sm leading-7 text-slate-500"
           />
           <p className="mt-1 text-base leading-7 text-slate-700"
-            dangerouslySetInnerHTML={{ __html: episode.description }}
-          >
-
+            dangerouslySetInnerHTML={{ __html: episode.description.substring(0, 350) + ' ...' }}
+            >
           </p>
           <div className="mt-4 flex items-center gap-4">
             <button
               type="button"
               onClick={() => player.toggle()}
-              className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900"
+              className="flex items-center text-sm font-bold leading-6 text-black hover:text-[#662B33] active:text-red-900"
               aria-label={`${player.playing ? 'Pause' : 'Play'} episode ${episode.title}`}
             >
               <PlayPauseIcon
@@ -85,7 +84,7 @@ function EpisodeEntry({ episode }) {
             </span>
             <Link
               href={`${episode.published}`}
-              className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900"
+              className="flex items-center text-sm font-bold leading-6 text-black hover:text-[#662B33] active:text-red-900"
               aria-label={`Show notes for episode ${episode.title}`}
             >
               Show notes
@@ -102,7 +101,7 @@ function EpisodeEntry({ episode }) {
               aria-label={`Download this episode`}
 
             >
-              <a target='_blank' className="flex items-center text-sm font-bold leading-6 text-black hover:text-red-700 active:text-red-900" download>Download</a>
+              <a target='_blank' className="flex items-center text-sm font-bold leading-6 text-black hover:text-[#662B33] active:text-red-900" download>Download</a>
             </Link>
           </div>
         </div>

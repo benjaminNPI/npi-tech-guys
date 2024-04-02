@@ -45,8 +45,8 @@ function ToggleSwitch() {
           onClick={handleClick}
           onChange={setEnabled}
           className={classNames(
-            enabled ? 'bg-red-700' : 'bg-gray-200',
-            'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-offset-2'
+            enabled ? 'bg-[#662B33]' : 'bg-gray-200',
+            'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#662B33] focus:ring-offset-2'
           )}
         >
           <span className="sr-only">Use setting</span>
@@ -227,7 +227,7 @@ function AboutSection(props) {
     <section {...props}>
       <h2 className="flex items-center font-mono text-sm font-medium leading-7 text-slate-900">
         <TinyWaveFormIcon
-          colors={['fill-black-300', 'fill-red-600']}
+          colors={['fill-black-300', 'fill-[#662B33]']}
           className="h-2.5 w-2.5"
         />
         <span className="ml-2.5">About</span>
@@ -256,7 +256,7 @@ function AboutSection(props) {
       {!isExpanded && (
         <button
           type="button"
-          className="mt-2 hidden text-sm font-bold leading-6 text-red-500 hover:text-red-700 active:text-pink-900 lg:inline-block"
+          className="mt-2 hidden text-sm font-bold leading-6 text-[#662B33] hover:text-[#662B34] active:text-pink-900 lg:inline-block"
           onClick={() => setIsExpanded(true)}
         >
           Show more
@@ -374,7 +374,7 @@ export function Layout({ children }) {
             <h1 className="text-xl font-bold text-slate-900 mb-4">Join our weekly mailing list!</h1>
 
 
-            <Link href='https://www.networkprovidersinc.com/drip-tips/' target='_blank' className="bg-red-700 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-blue active:bg-red-800">
+            <Link href='https://www.networkprovidersinc.com/drip-tips/' target='_blank' className="bg-[#662B33] text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-blue active:bg-red-800">
               Join now
             </Link>
           </div>
@@ -410,7 +410,7 @@ export function Layout({ children }) {
             <h1 className="text-xl font-bold text-slate-900 mb-4">Join our weekly mailing list!</h1>
 
 
-            <Link href='https://www.networkprovidersinc.com/drip-tips/' target='_blank' className="bg-red-700 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-blue active:bg-red-800">
+            <Link href='https://www.networkprovidersinc.com/drip-tips/' target='_blank' className="bg-[#662B33] text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-blue active:bg-red-800">
               Join now
             </Link>
           </div>

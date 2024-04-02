@@ -21,7 +21,7 @@ function NewsEntry({ news }) {
                 <div className="flex flex-col items-start">
                     <h2
                         id={`news-${news.title.trim().split(' ').join('-')}-title`}
-                        className="mt-2 text-lg font-bold hover:underline text-red-700"
+                        className="mt-2 text-lg font-bold hover:underline text-[#662B33]"
                     >
                         <Link href={`${news.link}`} target='_blank'>{news.title}</Link>
                     </h2>
