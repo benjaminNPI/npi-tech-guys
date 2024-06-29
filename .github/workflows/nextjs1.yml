@@ -23,8 +23,13 @@ jobs:
         run: npm install
 
       - name: Build and Export with Next.js
-        run: |
-          npm run build
+        run: npm run build
+
+      - name: Move build folder
+        run: mv .next build-output
+
+      - name: Prepare artifact
+        run: echo '{}' > data-to-send.json  # Create an empty JSON file if needed
 
       - name: Send data to webhook
         env:
