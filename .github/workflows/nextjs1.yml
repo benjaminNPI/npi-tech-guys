@@ -1,4 +1,4 @@
-name: Next.js Deployment
+name: Deploy and Notify
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy-and-notify:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,6 +30,16 @@ jobs:
 
       - name: Prepare artifact
         run: echo '{}' > data-to-send.json  # Create an empty JSON file if needed
+
+      - name: Debug payload content
+        run: cat data-to-send.json  # Output the contents of data-to-send.json for debugging
+
+      - name: Deploy via SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          ssh-keyscan -H example.com >> ~/.ssh/known_hosts  # Replace with your server's domain or IP
+          ssh -i $SSH_PRIVATE_KEY user@example.com 'bash -s' < deploy_script.sh  # Example SSH deployment
 
       - name: Send data to webhook
         env:
