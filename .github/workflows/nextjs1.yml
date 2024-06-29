@@ -22,16 +22,25 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Export with Next.js
+      - name: Build with Next.js
+        run: npm run build
+
+      - name: Export Next.js application
         run: npm run export
 
-      - name: Move build folder
-        run: mv .next out
+      - name: Move exported files to 'build-output' directory
+        run: |
+          mkdir build-output
+          mv out/* build-output/
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "your_email@example.com"
+          git config --global user.name "Your Name"
 
       - name: Commit changes
         run: |
-          git config --global user.email "ben@networkprovidersinc.com"
-          git config --global user.name "benjaminNPI"
           git add build-output
-          git commit -m "Add built files"
+          git commit -m "Add exported static files"
+          git pull origin main --rebase  # Fetch and rebase with main branch changes
           git push origin main
