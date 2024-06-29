@@ -44,11 +44,11 @@ export default function Home({ News }) {
         <>
             <Head>
                 <title>
-                    NPI Tech Guys
+                    NPI Tech Guys | News
                 </title>
                 <meta
                     name="description"
-                    content="Conversations with the most tragically misunderstood people of our time."
+                    content="Stay up to date with our latest news articles!"
                 />
             </Head>
             <div className="pt-16 pb-12 sm:pb-4 lg:pt-12">
