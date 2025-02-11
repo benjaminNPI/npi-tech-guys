@@ -70,4 +70,29 @@ jobs:
       - name: Static HTML export with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next export
 
-      -
+      - name: Debug: Check build output
+        run: ls -la ./out  # Verify that ./out exists and has files
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4  # Use upload-artifact@v4 instead of upload-pages-artifact
+        with:
+          name: github-pages  # Ensure this name matches in the deploy step
+          path: ./out
+          retention-days: 1  # Keeps the artifact for 1 day
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4  # Use latest artifact download action
+        with:
+          name: github-pages
+          path: ./out  # Ensure it matches the expected folder
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
