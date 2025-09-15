@@ -4,13 +4,11 @@ import { parse } from 'rss-to-json'
 import { Container } from '@/components/Container'
 import { FormattedDate } from '@/components/FormattedDate'
 
-const newsFeed = "https://www.networkprovidersinc.com/feed/";
+const newsFeed = "https://www.networkprovidersinc.com/blog/feed.xml/";
 
 
 
 function NewsEntry({ news }) {
-    let date = new Date(news.published)
-    // console.log(news.title.split(' ').slice(4,7).join('').split('/').join(''))
 
     return (
         <article
@@ -30,7 +28,7 @@ function NewsEntry({ news }) {
                     >
                     </p>
                     <FormattedDate
-                        date={date}
+                        date={new Date(news.published)}
                         className="order-first font-mono text-sm leading-7 text-slate-500"
                     />
                 </div>
@@ -39,7 +37,7 @@ function NewsEntry({ news }) {
     )
 }
 
-export default function Home({ News }) {
+export default function Home({ news }) {
     return (
         <>
             <Head>
@@ -58,29 +56,34 @@ export default function Home({ News }) {
                     </h1>
                 </Container>
                 <div className="divide-y divide-slate-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-slate-100 ">
-                    {News.map((news) => (
+                    {news.map((news) => (
                         <NewsEntry key={news.title} news={news} className="shadow-lg my-4" />
                     ))}
                 </div>
             </div>
-
         </>
     )
 }
 
+function stripCDATA(str = '') {
+    return str
+        .replace(/^(\[cdata\[|\!\[CDATA\[)/i, '') // remove starting markers
+        .replace(/(\]\]|]]>)$/i, '')              // remove ending markers
+        .trim();
+}
 
 // define the getStaticProps function
 export async function getStaticProps() {
     let feed = await parse(newsFeed);
+
     return {
         props: {
-            News: feed.items.map(
-                ({ title, description, link, content, published }) => ({
-                    title: ` ${title}`,
+            news: feed.items.map(
+                ({ title, description, link, published }) => ({
+                    title: stripCDATA(title),
                     published,
-                    description,
-                    link,
-                    content,
+                    description: stripCDATA(description),
+                    link: link
                 })
             ),
         },
