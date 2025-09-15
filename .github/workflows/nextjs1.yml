@@ -58,6 +58,13 @@ jobs:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
+      - name: Force update upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: noop
+          path: ./ # (a dummy small path, just so the action runs once)
+
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
         with:
