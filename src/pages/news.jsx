@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { parse } from 'rss-to-json'
 import { Container } from '@/components/Container'
+import Image from 'next/image'
 import { FormattedDate } from '@/components/FormattedDate'
 
 const newsFeed = "https://www.networkprovidersinc.com/blog/feed.xml/";
@@ -16,23 +17,42 @@ function NewsEntry({ news }) {
             className="py-10 sm:py-12"
         >
             <Container>
-                <div className="flex flex-col items-start">
-                    <h2
-                        id={`news-${news.title.trim().split(' ').join('-')}-title`}
-                        className="mt-2 text-lg font-bold hover:underline text-[#662B33]"
-                    >
-                        <Link href={`${news.link}`} target='_blank'>{news.title}</Link>
-                    </h2>
-                    <p className="mt-1 text-lg leading-7 text-slate-700"
-                        dangerouslySetInnerHTML={{ __html: news.description }}
-                    >
-                    </p>
+                <article className="flex flex-col gap-3">
+                    {/* Date */}
                     <FormattedDate
                         date={new Date(news.published)}
-                        className="order-first font-mono text-sm leading-7 text-slate-500"
+                        className="text-sm font-mono text-slate-500"
                     />
-                </div>
+                    {/* Title */}
+                    <h2
+                        id={`news-${news.title.trim().split(' ').join('-')}-title`}
+                        className="text-xl font-semibold text-[#662B33] hover:underline"
+                    >
+                        <Link href={news.link} target="_blank">
+                            {news.title}
+                        </Link>
+                    </h2>
+
+                    {/* Image + Description */}
+                    <div className="flex flex-col sm:flex-row gap-4 items-center">
+                        {news.media?.thumbnail?.url && (
+                            <Image
+                                src={news.media.thumbnail.url}
+                                alt={news.title}
+                                width={news.media.thumbnail.width}
+                                height={news.media.thumbnail.height}
+                                className="rounded-lg object-cover sm:w-48 sm:h-32"
+                            />
+                        )}
+                        <p
+                            className="text-slate-700 text-base leading-relaxed"
+                            dangerouslySetInnerHTML={{ __html: news.description }}
+                        />
+                    </div>
+
+                </article>
             </Container>
+
         </article>
     )
 }
@@ -75,15 +95,15 @@ function stripCDATA(str = '') {
 // define the getStaticProps function
 export async function getStaticProps() {
     let feed = await parse(newsFeed);
-
     return {
         props: {
             news: feed.items.map(
-                ({ title, description, link, published }) => ({
+                ({ title, description, link, published, media }) => ({
                     title: stripCDATA(title),
                     published,
                     description: stripCDATA(description),
-                    link: link
+                    link: link,
+                    media: media
                 })
             ),
         },
