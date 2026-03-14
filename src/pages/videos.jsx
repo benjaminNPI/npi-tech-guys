@@ -140,12 +140,22 @@ export async function getStaticProps() {
             }
 
             const pageVideos = (data.items || [])
-                .filter(
-                    (item) =>
-                        item?.snippet?.resourceId?.videoId &&
-                        item.snippet.title !== 'Private video' &&
-                        item.snippet.title !== 'Deleted video'
-                )
+                .filter((item) => {
+                    const videoId = item?.snippet?.resourceId?.videoId
+                    const title = item?.snippet?.title?.trim()
+                    const thumbnail =
+                        item?.snippet?.thumbnails?.high?.url ||
+                        item?.snippet?.thumbnails?.medium?.url ||
+                        item?.snippet?.thumbnails?.default?.url
+
+                    return (
+                        !!videoId &&
+                        !!title &&
+                        !!thumbnail &&
+                        title !== 'Private video' &&
+                        title !== 'Deleted video'
+                    )
+                })
                 .map((item) => ({
                     id: item.snippet.resourceId.videoId,
                     title: item.snippet.title,
