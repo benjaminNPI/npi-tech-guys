@@ -3,69 +3,61 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
-import { Switch } from '@headlessui/react'
 import { AudioPlayer } from '@/components/player/AudioPlayer'
 import posterImage from '@/images/poster.png'
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-function ToggleSwitch() {
-  const [enabled, setEnabled] = useState(false)
-  let { pathname } = useRouter();
-  let router = useRouter();
-  useEffect(() => {
-    if (pathname === '/news' && enabled === false) {
-      setEnabled(true);
-    } else if (pathname === '/') {
-      setEnabled(false)
-    }
-  }, [pathname]);
-  function handleClick() {
-    if (pathname === '/') {
-      router.push("/news");
-    } else {
-      router.push("/");
-    }
+const navItems = [
+  { label: 'Podcasts', href: '/' },
+  { label: 'News', href: '/news' },
+  { label: 'Videos', href: '/videos' },
+]
+export default function ContentNav() {
+  const router = useRouter()
+
+  const isActive = (href) => {
+    if (href === '/') return router.pathname === '/'
+    return router.pathname.startsWith(href)
   }
 
-
-
   return (
-    <>
-      <div className='flex justify-center lg:justify-start mt-5'>
-        {enabled === false && (
-          <h3 className='mr-3 font-bold'>Podcasts</h3>
-        )}
-        {enabled && (
-          <h3 className='mr-3'>Podcasts</h3>
-        )}
-        <Switch
-          checked={enabled}
-          onClick={handleClick}
-          onChange={setEnabled}
-          className={classNames(
-            enabled ? 'bg-[#662B33]' : 'bg-gray-200',
-            'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#662B33] focus:ring-offset-2'
-          )}
-        >
-          <span className="sr-only">Use setting</span>
-          <span
-            aria-hidden="true"
-            className={classNames(
-              enabled ? 'translate-x-5' : 'translate-x-0',
-              'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out'
-            )}
-          />
-        </Switch>
-        {enabled && (
-          <h3 className='ml-3 font-bold'>News</h3>
-        )}
-        {enabled === false && (
-          <h3 className='ml-3'>News</h3>
-        )}
+    <nav
+      aria-label="Content sections"
+      className="mt-6 flex justify-center"
+    >
+      <div
+        className="
+          inline-flex w-full max-w-md items-center justify-center gap-1
+          rounded-full border border-slate-200 bg-white/90 p-1.5
+          shadow-sm shadow-slate-200/60
+          backdrop-blur
+        "
+        role="tablist"
+        aria-orientation="horizontal"
+      >
+        {navItems.map((item) => {
+          const active = isActive(item.href)
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              role="tab"
+              aria-selected={active}
+              aria-current={active ? 'page' : undefined}
+              className={clsx(
+                'flex-1 rounded-full px-4 py-2.5 text-center text-sm font-semibold transition-all duration-200',
+                'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#662B33] focus-visible:ring-offset-2',
+                active
+                  ? 'bg-[#662B33] text-white shadow-md'
+                  : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
+              )}
+            >
+              <span className="block truncate">{item.label}</span>
+            </Link>
+          )
+        })}
       </div>
-    </>
+    </nav>
   )
 }
 function randomBetween(min, max, seed = 1) {
@@ -310,7 +302,9 @@ export function Layout({ children }) {
             </p>
             <p className="mt-3 text-lg font-medium leading-8 text-slate-700">
             </p>
-            <ToggleSwitch />
+            <div className="mt-6">
+              <ContentNav />
+            </div>
           </div>
           <AboutSection className="mt-12 hidden lg:block" />
           <section className="mt-10 lg:mt-12 mb-10">
